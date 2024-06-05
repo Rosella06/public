@@ -1,0 +1,109 @@
+
+.nav-containers {
+    background-color: #333;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-contents {
+    display: flex;
+    align-items: center;
+}
+
+.barss {
+    list-style: none;
+    display: flex;
+    gap: 0.75rem; 
+    margin: 0;
+    padding: 0;
+}
+
+.barss li {
+    display: inline;
+}
+
+.barss a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    background-color: #555;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.barss a:hover {
+    background-color: #777;
+}
+
+.btn-hamburgers {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.form-containers {
+    margin: 2rem auto;
+    padding: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-width: 600px;
+    background-color: #f9f9f9;
+}
+
+.form-titles {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.product-forms {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-groups {
+    margin-bottom: 1rem;
+}
+
+.form-groups label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #333;
+}
+
+.form-inputs {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.form-buttons {
+    padding: 0.75rem;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    align-self: flex-end;
+}
+
+.form-buttons:hover {
+    background-color: #0056b3;
+}
+
+.success-messages {
+    text-align: center;
+    color: green;
+    font-size: 1.25rem;
+    margin-top: 1rem;
+}
