@@ -19,7 +19,7 @@ const EditProduct = () => {
             try {
                 const res = await axios.get(`http://localhost:8001/product/${id}`);
                 setProduct({
-                    id: res.data[0]?.id,
+                    id : res.data[0]?.id,
                     name: res.data[0]?.name,
                     price: res.data[0]?.price,
                     quantity: res.data[0]?.quantity,

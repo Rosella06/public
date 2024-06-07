@@ -56,8 +56,6 @@ const AddProduct = () => {
                 <h2 className='form-titles'>Add New Product</h2>
                 <form onSubmit={handleSubmit} className='product-forms'>
                     <div className='form-groups'>
-                    
-                        
                         <label>id:</label>
                         <input
                             type="number"

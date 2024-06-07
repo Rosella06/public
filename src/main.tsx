@@ -9,6 +9,7 @@ import {
 import About from './pages/about.tsx';
 import AddProduct from './pages/AddProduct.tsx';
 import EditProduct from './pages/EditProduct.tsx';
+// import Cart from './pages/cart.tsx';
 
 const router = createBrowserRouter([
   {
@@ -26,7 +27,8 @@ const router = createBrowserRouter([
   {
     path: "edit-product/:id",
     element: <EditProduct />
-  }
+  },
+ 
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
