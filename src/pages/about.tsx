@@ -78,6 +78,7 @@ const About = () => {
                         />
                     </div>
                 </div>
+                
                 <ul className='bars'>
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/about">Shopee</Link></li>

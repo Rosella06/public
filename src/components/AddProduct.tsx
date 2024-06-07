@@ -10,7 +10,7 @@ function AddProduct() {
       <ul className='bars'>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/about">Shopee</Link></li>
-        <li><Link to="/AddProduct">AddProduct</Link></li>
+        <li><Link to="/add-product">AddProduct</Link></li>
       </ul>
     </nav>
   );

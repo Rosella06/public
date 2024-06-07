@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import '../styles/AddProduct.css';
 
 const AddProduct = () => {
+    const [id, setid] = useState<number>(0);
     const [name, setName] = useState<string>('');
     const [price, setPrice] = useState<number>(0);
     const [quantity, setQuantity] = useState<number>(0);
@@ -54,6 +55,18 @@ const AddProduct = () => {
             <div className='form-containers'>
                 <h2 className='form-titles'>Add New Product</h2>
                 <form onSubmit={handleSubmit} className='product-forms'>
+                    <div className='form-groups'>
+                    
+                        
+                        <label>id:</label>
+                        <input
+                            type="number"
+                            value={id}
+                            onChange={(e) => setid(parseInt(e.target.value))}
+                            required
+                            className='form-inputs'
+                        />
+                    </div>
                     <div className='form-groups'>
                         <label>ชื่อสินค้า:</label>
                         <input

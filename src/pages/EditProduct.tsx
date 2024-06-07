@@ -7,6 +7,7 @@ const EditProduct = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [product, setProduct] = useState({
+        id: 0,
         name: '',
         price: 0,
         quantity: 0,
@@ -18,6 +19,7 @@ const EditProduct = () => {
             try {
                 const res = await axios.get(`http://localhost:8001/product/${id}`);
                 setProduct({
+                    id: res.data[0]?.id,
                     name: res.data[0]?.name,
                     price: res.data[0]?.price,
                     quantity: res.data[0]?.quantity,
@@ -54,6 +56,10 @@ const EditProduct = () => {
         <div>
             <h1>แก้ไขสินค้า</h1>
             <form onSubmit={handleSubmit}>
+            <div>
+                    <label>id:</label>
+                    <input type="number" name="id" value={product.id} onChange={handleChange} required />
+                </div>
                 <div>
                     <label>ชื่อสินค้า:</label>
                     <input type="text" name="name" value={product.name} onChange={handleChange} required />
