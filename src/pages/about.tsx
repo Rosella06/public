@@ -5,6 +5,7 @@ import logo from "../img/Shopee.svg.png";
 import axios from 'axios';
 import '@fortawesome/fontawesome-free/css/all.css';
 
+
 interface Product {
     image: string;
     name: string;
@@ -13,10 +14,16 @@ interface Product {
     id: number;
 }
 
+interface CartItem {
+    id: number;
+    sum: number;
+}
+
 const About = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [search, setSearch] = useState<string>('');
-    const [cart, setCart] = useState<Product[]>([]);
+    const [cart, setCart] = useState<CartItem[]>([]);
+    const [isCartVisible, setCartVisible] = useState(false);
 
     const fetchData = async () => {
         try {
@@ -25,7 +32,7 @@ const About = () => {
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 
     useEffect(() => {
         fetchData();
@@ -57,12 +64,44 @@ const About = () => {
     }
 
     const handleAddToCart = (product: Product) => {
-        setCart([...cart, product]);
-    }
+        const cartIndex = cart.findIndex(x => x.id === product.id);
+        if (cartIndex === -1) {
+            setCart([...cart, { id: product.id, sum: 1 }]);
+        } else {
+            const newCart = [...cart];
+            newCart[cartIndex].sum += 1;
+            setCart(newCart);
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+    };
 
     const handleRemoveFromCart = (productId: number) => {
-        setCart(cart.filter(item => item.id !== productId));
-    }
+        const newCart = cart.filter(item => item.id !== productId);
+        setCart(newCart);
+        localStorage.setItem('cart', JSON.stringify(newCart));
+    };
+    const handleIncreaseQuantity = (productId: number) => {
+        const newCart = cart.map(item => {
+            if (item.id === productId) {
+                return { ...item, sum: item.sum + 1 };
+            }
+            return item;
+        });
+        setCart(newCart);
+        localStorage.setItem('cart', JSON.stringify(newCart));
+    };
+
+    const handleDecreaseQuantity = (productId: number) => {
+        const newCart = cart.map(item => {
+            if (item.id === productId && item.sum > 1) {
+                return { ...item, sum: item.sum - 1 };
+            }
+            return item;
+        }).filter(item => item.sum > 0);
+        setCart(newCart);
+        localStorage.setItem('cart', JSON.stringify(newCart));
+    };
+
 
     const filter = products.filter((s) => s.name.includes(search) || s.price.toString().includes(search));
 
@@ -71,10 +110,9 @@ const About = () => {
         <div>
             <nav className='nav'>
                 <div className='nav-container'>
-                    <button className="btn-hamburger">
-                    </button>
+                    <button className="btn-hamburger"></button>
                     <div className='logo'>
-                        <img src={logo} alt="" />
+                        <img src={logo} alt="Shopee Logo" />
                     </div>
                     <div className='sidebar'>
                         <input
@@ -93,7 +131,7 @@ const About = () => {
                     <li><Link to="/about">Shopee</Link></li>
                     <li><Link to="/add-product">Add Product</Link></li>
                     <li className='nav-profile-cart'>
-                        <i className="fas fa-shopping-cart" aria-hidden="true"></i>
+                        <i className="fas fa-shopping-cart" aria-hidden="true" onClick={() => setCartVisible(true)}></i>
                         {cart.length > 0 && <span className="cartcount">{cart.length}</span>}
 
                     </li>
@@ -101,153 +139,67 @@ const About = () => {
 
             </nav>
 
-            {/* <div className='modal' >
-                <div className='modal-ba'></div>
-                <div className='modal-page'>
-                    <h2>รายละเอียดสินค้า</h2>
-                    <br></br>
-                    <div className="modaldesc-content">
-                        <img src={logos} alt="" className='modaldesc-img' />
-                        <div className="modaldesc-detail">
-                            <p>ID </p>
-                            <p>ชื่อสินค้า </p>
-                            <p>ราคาสินค้า </p>
-                            <p>จำนวนคงเหลือ </p>
-                        </div>
-                    </div>
-                    <div className="btn-control">
-                        <button className='btn'>
-                            close
-                        </button>
-                        <button className='btn btn-buy'>
-                            Add to cart
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div className='modal'>
-                <div className='modal-ba'></div>
-                <div className='modal-page'>
-                    <h2>My cart</h2>
-                    <br></br>
-                    <div className="cartlist">
-                        <div className="cartlist-items">
-                            <div className='cartlist-left'>
-                                <img src={logos} alt="" className='modaldesc-img' />
-                                <div className='cartlist-detail'>
-                                    <p> Product Name</p>
-                                    <p>5000</p>
-                                </div>
-                            </div>
-                            <div className='cartlist-right'>
-                                <p className='btnc'> -</p>
-                                <p>1</p>
-                                <p className='btnc'> +</p>
-                            </div>
-                        </div>
-                        <div className="cartlist-items">
-                            <div className='cartlist-left'>
-                                <img src={logos} alt="" className='modaldesc-img' />
-                                <div className='cartlist-detail'>
-                                    <p> Product Name</p>
-                                    <p>5000</p>
-                                </div>
-                            </div>
-                            <div className='cartlist-right'>
-                                <p className='btnc'> -</p>
-                                <p>1</p>
-                                <p className='btnc'> +</p>
-                            </div>
-                        </div>
-                        <div className="cartlist-items">
-                            <div className='cartlist-left'>
-                                <img src={logos} alt="" className='modaldesc-img' />
-                                <div className='cartlist-detail'>
-                                    <p> Product Name</p>
-                                    <p>5000</p>
-                                </div>
-                            </div>
-                            <div className='cartlist-right'>
-                                <p className='btnc'> -</p>
-                                <p>1</p>
-                                <p className='btnc'> +</p>
-                            </div>
-                        </div><div className="cartlist-items">
-                            <div className='cartlist-left'>
-                                <img src={logos} alt="" className='modaldesc-img' />
-                                <div className='cartlist-detail'>
-                                    <p> Product Name</p>
-                                    <p>5000</p>
-                                </div>
-                            </div>
-                            <div className='cartlist-right'>
-                                <p className='btnc'> -</p>
-                                <p>1</p>
-                                <p className='btnc'> +</p>
-                            </div>
-                        </div><div className="cartlist-items">
-                            <div className='cartlist-left'>
-                                <img src={logos} alt="" className='modaldesc-img' />
-                                <div className='cartlist-detail'>
-                                    <p> Product Name</p>
-                                    <p>5000</p>
-                                </div>
-                            </div>
-                            <div className='cartlist-right'>
-                                <p className='btnc'> -</p>
-                                <p>1</p>
-                                <p className='btnc'> +</p>
-                            </div>
-                        </div><div className="cartlist-items">
-                            <div className='cartlist-left'>
-                                <img src={logos} alt="" className='modaldesc-img' />
-                                <div className='cartlist-detail'>
-                                    <p> Product Name</p>
-                                    <p>5000</p>
-                                </div>
-                            </div>
-                            <div className='cartlist-right'>
-                                <p className='btnc'> -</p>
-                                <p>1</p>
-                                <p className='btnc'> +</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='btn-control'>
-                        <button className='btn'>
-                            cancel
-                        </button>
-                        <button className='btn btn-buy'>
-                            Buy
-                        </button>
-                    </div>
-                </div>
-            </div> */}
-
             <div className='product'>
                 {filter.map((e: Product) => (
                     <div className='product-items' key={e.id}>
-                        <img src={e.image} alt="" className="product-image" />
-                        <p>ID : {e.id}</p>
-                        <p className="product-name">ชื่อสินค้า : {e.name}</p>
-                        <p>ราคาสินค้า : {e.price}$</p>
-                        <p>จำนวนคงเหลือ : {e.quantity}</p>
+                        <img src={e.image} alt={e.name} className="product-image" />
+                        <p>ID: {e.id}</p>
+                        <p className="product-name">ชื่อสินค้า: {e.name}</p>
+                        <p>ราคาสินค้า: {e.price}$</p>
+                        <p>จำนวนคงเหลือ: {e.quantity}</p>
                         <div className="button-group">
                             <Link to={`/edit-product/${e.id}`} className="edit-link">แก้ไข</Link>
                         </div>
                         <div className="button-groupst">
                             <button className="btn-add-to-cart" onClick={() => handleAddToCart(e)}>เพิ่มลงตะกร้า</button>
                         </div>
-
                         <div className="button-groups">
                             <button onClick={() => handleDelete(e.id)}>ลบ</button>
                         </div>
                     </div>
                 ))}
             </div>
+
+            {isCartVisible && (
+                <div className='modal'>
+                    <div className='modal-ba' onClick={() => setCartVisible(false)}></div>
+                    <div className='modal-page'>
+                        <h2>ตะกร้าสินค้า</h2>
+                        <div className="cartlist">
+                            {cart.map(x => {
+                                const currentProduct = products.find(f => f.id === x.id);
+                                if (currentProduct) {
+                                    return (
+                                        <div className='cartlist-items' key={x.id}>
+                                            <div className='cartlist-left'>
+                                                <img src={currentProduct.image} alt={currentProduct.name} className='modaldesc-img' />
+                                                <div className='cartlist-detail'>
+                                                    <p>ชื่อสินค้า: {currentProduct.name}</p>
+                                                    <p>ราคา: {currentProduct.price}$</p>
+                                                    <p>จำนวนคงเหลือ: {currentProduct.quantity}</p>
+                                                </div>
+                                            </div>
+                                            <div className='cartlist-right'>
+                                                <p>จำนวน: {x.sum}</p>
+                                                <button className='btn' onClick={() => handleIncreaseQuantity(x.id)}>+</button>
+                                                <button className='btn' onClick={() => handleDecreaseQuantity(x.id)}>-</button>
+                                                <button className='btn-remove' onClick={() => handleRemoveFromCart(x.id)}>ลบจากตะกร้า</button>
+                                            </div>
+                                        </div>
+                                    );
+                                }
+                                return null;
+                            })}
+                        </div>
+                        <div className='btn-control'>
+                            <button className='btn' onClick={() => setCartVisible(false)}>ปิด</button>
+                            <button className='btn btn-buy'>ซื้อสินค้า</button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
-}
-
+};
 
 export default About;

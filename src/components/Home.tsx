@@ -11,7 +11,7 @@ function Shopee() {
       <ul className='bars'>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/about">Shopee</Link></li>
-        
+        <li><Link to="/Login">Login-n</Link></li>
       </ul>
     </nav>
   );

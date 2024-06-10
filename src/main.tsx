@@ -28,6 +28,11 @@ const router = createBrowserRouter([
     path: "edit-product/:id",
     element: <EditProduct />
   },
+  // {
+  //   path: "Login",
+  //   element: <Login-n />
+  // },
+  
  
 ]);
 
