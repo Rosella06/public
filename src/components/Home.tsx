@@ -29,9 +29,8 @@ function Home () {
     
     return (
            
-        <div>
-            <h1>Home Page</h1>
-            <p>Welcome {localStorage.getItem('name')}</p>
+        <div className="container">
+            <h1>Welcome {localStorage.getItem('name')}</h1>
             <button onClick={logout} className="logout">LogOut</button>
             <button onClick={deleteAccount} className="delete">Delete</button>
         </div>
