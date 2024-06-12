@@ -15,10 +15,6 @@ const AddProduct = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // if (name.trim() === '' || price <= 0 || quantity <= 0 || !validateImageUrl(image)) {
-        //     console.error("Invalid input data");
-        //     return;
-        // }
         try {
             const newProduct = { name:name, price:price, quantity:quantity, image:image };
            const response =  await axios.post('http://localhost:8001/add-product', newProduct);
@@ -46,7 +42,7 @@ const AddProduct = () => {
                     </button>
                 </div>
                 <ul className='barss'>
-                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/resume">Resume</Link></li>
                     <li><Link to="/about">Shopee</Link></li>
                     <li><Link to="/add-product">Add Product</Link></li>
                 </ul>

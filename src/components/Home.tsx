@@ -1,20 +1,42 @@
-// import React from 'react';
+import React from "react";
 import '../styles/Home.css';
 import { Link } from 'react-router-dom';
 
-function Shopee() {
-  return (
-    <nav>
-      <button className="btn-hamburger">
-        <i className="fas fa-bars"></i>
-      </button>
-      <ul className='bars'>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/about">Shopee</Link></li>
-        <li><Link to="/Login">Login-n</Link></li>
-      </ul>
-    </nav>
-  );
+// function Shopee() {
+//   return (
+//     <nav>
+//       <button className="btn-hamburger">
+//         <i className="fas fa-bars"></i>
+//       </button>
+//       <ul className='bars'>
+//         <li><Link to="/">Resume</Link></li>
+//         <li><Link to="/about">Shopee</Link></li>
+//       </ul>
+//     </nav>
+//   );
+// }
+
+function Home () {
+    const logout = () => {
+        localStorage.removeItem("signUp");
+        window.location.reload();
+    }
+
+    const deleteAccount = () => { 
+        localStorage.clear();
+        window.location.reload();
+    }
+    
+    return (
+           
+        <div>
+            <h1>Home Page</h1>
+            <p>Welcome {localStorage.getItem('name')}</p>
+            <button onClick={logout} className="logout">LogOut</button>
+            <button onClick={deleteAccount} className="delete">Delete</button>
+        </div>
+
+    );
 }
 
-export default Shopee;
+export default Home ;

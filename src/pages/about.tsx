@@ -6,6 +6,7 @@ import axios from 'axios';
 import '@fortawesome/fontawesome-free/css/all.css';
 
 
+
 interface Product {
     image: string;
     name: string;
@@ -30,38 +31,19 @@ const About = () => {
             const res = await axios.get('http://localhost:8001/product');
             setProducts(res.data);
         } catch (error) {
-            console.log(error);
+            console.log(error);0
         }
     };
 
     useEffect(() => {
         fetchData();
-        //     // fetch('http://localhost:8001/product')
-        //     //     .then((e) => e.json())
-        //     //     .then((x) => {
-        //     //         setProduct(x);
-        //     //     });
-    }, []);
 
-    // const handleDelete = async (productId: number) => {
-    //     try {
-    //         await axios.delete(`http://localhost:8001/product/${productId}`);
-    //         fetchData();
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // }
-    const handleDelete = async (productId: number) => {
-        const confirmed = window.confirm("คุณแน่ใจหรือไม่ที่ต้องการลบสินค้านี้?");
-        if (confirmed) {
-            try {
-                await axios.delete(`http://localhost:8001/product/${productId}`);
-                fetchData();
-            } catch (error) {
-                console.error(error);
-            }
+        const cartlocalStorage = localStorage.getItem('cart');
+        if (cartlocalStorage) {
+            const cartdata = JSON.parse(cartlocalStorage);
+            setCart(cartdata);
         }
-    }
+    }, []); 
 
     const handleAddToCart = (product: Product) => {
         const cartIndex = cart.findIndex(x => x.id === product.id);
@@ -74,6 +56,7 @@ const About = () => {
         }
         localStorage.setItem('cart', JSON.stringify(cart));
     };
+
 
     const handleRemoveFromCart = (productId: number) => {
         const newCart = cart.filter(item => item.id !== productId);
@@ -102,11 +85,40 @@ const About = () => {
         localStorage.setItem('cart', JSON.stringify(newCart));
     };
 
+    useEffect(() => {
+        fetchData();
+    //     //     // fetch('http://localhost:8001/product')
+    //     //     //     .then((e) => e.json())
+    //     //     //     .then((x) => {
+    //     //     //         setProduct(x);
+    //     //     //     });
+    }, []);
+
+    // const handleDelete = async (productId: number) => {
+    //     try {
+    //         await axios.delete(`http://localhost:8001/product/${productId}`);
+    //         fetchData();
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // }
+    const handleDelete = async (productId: number) => {
+        const confirmed = window.confirm("คุณแน่ใจหรือไม่ที่ต้องการลบสินค้านี้?");
+        if (confirmed) {
+            try {
+                await axios.delete(`http://localhost:8001/product/${productId}`);
+             fetchData();
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    }
+
+
 
     const filter = products.filter((s) => s.name.includes(search) || s.price.toString().includes(search));
 
     return (
-        
         <div>
             <nav className='nav'>
                 <div className='nav-container'>
@@ -124,19 +136,18 @@ const About = () => {
                         />
                     </div>
                 </div>
-                
 
                 <ul className='bars'>
-                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/resume">Resume</Link></li>
                     <li><Link to="/about">Shopee</Link></li>
                     <li><Link to="/add-product">Add Product</Link></li>
                     <li className='nav-profile-cart'>
                         <i className="fas fa-shopping-cart" aria-hidden="true" onClick={() => setCartVisible(true)}></i>
                         {cart.length > 0 && <span className="cartcount">{cart.length}</span>}
-
                     </li>
+                    <button > <Link to="/">LogOut</Link></button>
+                    
                 </ul>
-
             </nav>
 
             <div className='product'>
@@ -145,7 +156,7 @@ const About = () => {
                         <img src={e.image} alt={e.name} className="product-image" />
                         <p>ID: {e.id}</p>
                         <p className="product-name">ชื่อสินค้า: {e.name}</p>
-                        <p>ราคาสินค้า: {e.price}$</p>
+                        <p>ราคาสินค้า: {e.price}b</p>
                         <p>จำนวนคงเหลือ: {e.quantity}</p>
                         <div className="button-group">
                             <Link to={`/edit-product/${e.id}`} className="edit-link">แก้ไข</Link>
@@ -175,7 +186,7 @@ const About = () => {
                                                 <img src={currentProduct.image} alt={currentProduct.name} className='modaldesc-img' />
                                                 <div className='cartlist-detail'>
                                                     <p>ชื่อสินค้า: {currentProduct.name}</p>
-                                                    <p>ราคา: {currentProduct.price}$</p>
+                                                    <p>ราคา: {currentProduct.price}B</p>
                                                     <p>จำนวนคงเหลือ: {currentProduct.quantity}</p>
                                                 </div>
                                             </div>
@@ -201,5 +212,6 @@ const About = () => {
         </div>
     );
 };
+
 
 export default About;

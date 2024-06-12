@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
+import Resume from './pages/Resume.tsx';
+import Home from './components/Home.tsx'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -17,6 +19,10 @@ const router = createBrowserRouter([
     element: <App />
   },
   {
+    path: "resume",
+    element: <Resume />
+  },
+  {
     path: "about",
     element: <About />
   },
@@ -28,12 +34,11 @@ const router = createBrowserRouter([
     path: "edit-product/:id",
     element: <EditProduct />
   },
-  // {
-  //   path: "Login",
-  //   element: <Login-n />
-  // },
-  
- 
+
+  {
+    path: "Home",
+    element: <Home />
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
