@@ -145,7 +145,7 @@ const About = () => {
                         <i className="fas fa-shopping-cart" aria-hidden="true" onClick={() => setCartVisible(true)}></i>
                         {cart.length > 0 && <span className="cartcount">{cart.length}</span>}
                     </li>
-                    <button > <Link to="/">LogOut</Link></button>
+                    <li><Link to="/"> LogOut</Link></li>
                     
                 </ul>
             </nav>

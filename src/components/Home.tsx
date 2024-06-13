@@ -16,26 +16,44 @@ import { Link } from 'react-router-dom';
 //   );
 // }
 
-function Home () {
-    const logout = () => {
-        localStorage.removeItem("signUp");
-        window.location.reload();
-    }
+// function Home() {
+//     const logout = () => {
+//         localStorage.removeItem("signUp");
+//         window.location.reload();
+//     }
 
-    const deleteAccount = () => { 
-        localStorage.clear();
-        window.location.reload();
-    }
-    
+    // const deleteAccount = () => {
+    //     localStorage.clear();
+    //     window.location.reload();
+    // }
+
+//     return (
+
+//         <div className="container-n">
+//             <h1>Welcome {localStorage.getItem('name')}</h1>
+//             <button onClick={logout} className="logout">LogOut</button>
+//             <button onClick={deleteAccount} className="delete">Delete</button> 
+            
+//         </div>
+//     );
+// }
+function Home() {
+    localStorage.removeItem("signUp");
+    window.location.reload();
     return (
-           
-        <div className="container">
-            <h1>Welcome {localStorage.getItem('name')}</h1>
-            <button onClick={logout} className="logout">LogOut</button>
-            <button onClick={deleteAccount} className="delete">Delete</button>
+        <div className="container-n">
+            <h1>Login</h1>
+            <div className="input_space">
+                <input placeholder="Email" type='text' />
+            </div>
+            <div className="input_space">
+                <input placeholder="Password" type='password' />
+            </div>
+            <Link to="/"><button>Sign In</button></Link>
         </div>
-
     );
 }
 
-export default Home ;
+
+
+export default Home;

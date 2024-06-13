@@ -24,7 +24,7 @@ ul.bars {
 
 ul.bars li {
     display: inline;
-    margin-right: 30px;
+    margin-right: 10px;
 }
 
 ul.bars li a {
@@ -76,7 +76,7 @@ img {
 }
 
 .sidebar {
-    display: flex;
+    
     padding: 8px;
 }
 
@@ -95,10 +95,10 @@ img {
     width: 500px; 
     font-size: 1.2vw;
     outline: none;
-    border-radius: 5px;
+    
     background-color: #f8f4f4;
     transition: 0.3s;
-    margin-top: 10%;
+    margin-top: 5%;
 }
 
 
@@ -612,7 +612,9 @@ img {
     cursor: pointer;
     border-radius: 9px;
 }
-
+.LogOut{
+    background-color: #a1aebd;
+}
 
 
 
