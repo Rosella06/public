@@ -50,7 +50,7 @@ function SignInSignupWithLocalStorage() {
     await axios.post("http://localhost:8001/signin", {
       email: emailRef.current?.value,
       password: passwordRef.current?.value,
-     
+      
     });
     const localStoredEmail = localStorage.getItem("email");
     const localStoredPassword = localStorage.getItem("password");
@@ -67,6 +67,7 @@ function SignInSignupWithLocalStorage() {
     ) {
       console.log("login")
       localStorage.setItem("signUp", emailRef.current!.value);
+     
       navigate('/about');
       setShowResume(true);
     } else {
@@ -87,6 +88,7 @@ function SignInSignupWithLocalStorage() {
   const handleSignUpPage = () => {
     setShowSignIn(false);
     navigate("/signUp");
+    // window.location.reload()
   }
   return (
     <div className="signin-page ">

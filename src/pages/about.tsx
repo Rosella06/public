@@ -21,7 +21,7 @@ interface CartItem {
 }
 
 const About = () => {
-   const navigate = useNavigate();
+   const navigate = useNavigate()
 
     const [products, setProducts] = useState<Product[]>([]);
     const [search, setSearch] = useState<string>('');
@@ -39,7 +39,11 @@ const About = () => {
 
     useEffect(() => {
         fetchData();
-
+        const isLoggedIn = localStorage.getItem("signUp") !== null;
+        if (!isLoggedIn) {
+            navigate('/');
+        }//ออกทุกหน้า
+  
         const cartlocalStorage = localStorage.getItem('cart');
         if (cartlocalStorage) {
             const cartdata = JSON.parse(cartlocalStorage);
@@ -116,7 +120,11 @@ const About = () => {
         }
     }
 
-
+    const logout=()=>{
+        localStorage.removeItem("signUp")
+        navigate('/');
+        // window.location.reload()
+    }
 
     const filter = products.filter((s) => s.name.includes(search) || s.price.toString().includes(search));
 
@@ -147,8 +155,8 @@ const About = () => {
                         <i className="fas fa-shopping-cart" aria-hidden="true" onClick={() => setCartVisible(true)}></i>
                         {cart.length > 0 && <span className="cartcount">{cart.length}</span>}
                     </li>
-                    <li><Link to="/"> LogOut</Link></li>
-                    
+                    <li><Link to="/" onClick={logout}>Log Out</Link></li>
+
                 </ul>
             </nav>
 

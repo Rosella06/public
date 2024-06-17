@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+  
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -29,6 +30,7 @@ const SignUp = () => {
       localStorage.setItem("email", email);
       localStorage.setItem("password", password);
       localStorage.setItem("signUp", email);
+      // window.location.reload()
       navigate("/about");
     } catch (error) {
       console.error("Error signing up:", error);
