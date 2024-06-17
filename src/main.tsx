@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
 import Resume from './pages/Resume.tsx';
-import Home from './components/Home.tsx'
+import Home from './components/Home.tsx';
+import SignUp from '../src/pages/SignUp.tsx'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -11,6 +12,7 @@ import {
 import About from './pages/about.tsx';
 import AddProduct from './pages/AddProduct.tsx';
 import EditProduct from './pages/EditProduct.tsx';
+
 // import Cart from './pages/cart.tsx';
 
 const router = createBrowserRouter([
@@ -38,6 +40,10 @@ const router = createBrowserRouter([
   {
     path: "Home",
     element: <Home />
+  },
+  {
+    path: "SignUp",
+    element: <SignUp />
   },
 ]);
 

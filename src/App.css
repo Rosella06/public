@@ -11,29 +11,26 @@
   margin-bottom: 10px;
 }
 
-input[type="text"],
-input[type="password"] {
+input[type=text], input[type=password] {
   width: 100%;
-  padding: 8px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
   border: 1px solid #ccc;
-  border-radius: 3px;
   box-sizing: border-box;
 }
 
 button {
-  width:auto;
-  padding: 10px;
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 45px;
+  margin: 15px 0;
   border: none;
-  border-radius: 3px;
-  color: #ebeaea;
   cursor: pointer;
-  margin-right: 5px;
-  padding: 5px 10px;
-  background-color:  #2d6efce5;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-    transition: 0.3s;
+  
+}
+button:hover {
+  opacity: 0.8;
 }
 h1 {
   text-align: center;

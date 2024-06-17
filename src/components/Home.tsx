@@ -38,8 +38,8 @@ import { Link } from 'react-router-dom';
 //     );
 // }
 function Home() {
-    localStorage.removeItem("signUp");
-    window.location.reload();
+    // localStorage.removeItem("signUp");
+    // window.location.reload();
     return (
         <div className="container-n">
             <h1>Login</h1>
@@ -53,7 +53,5 @@ function Home() {
         </div>
     );
 }
-
-
 
 export default Home;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "../styles/about.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../img/Shopee.svg.png";
 import axios from 'axios';
 import '@fortawesome/fontawesome-free/css/all.css';
@@ -21,6 +21,8 @@ interface CartItem {
 }
 
 const About = () => {
+   const navigate = useNavigate();
+
     const [products, setProducts] = useState<Product[]>([]);
     const [search, setSearch] = useState<string>('');
     const [cart, setCart] = useState<CartItem[]>([]);
