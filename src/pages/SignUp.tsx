@@ -38,26 +38,44 @@ const SignUp = () => {
     }
   };
   
-
   return (
-    <div className="signin-page ">
-    <div className="container-n">
-      <h1> Create a new account</h1>
-      <div className="input_space">
-        <input placeholder="Name" type='text' ref={nameRef} />
-      </div>
-      <div className="input_space">
-        <input placeholder="Email" type='text' ref={emailRef} />
-      </div>
-      <div className="input_space">
-        <input placeholder="Password" type='password' ref={passwordRef} />
-      </div>
-      <div className="Sign-n">
-        <button onClick={signUpUser}>Sign Up</button>
+    <div className="hero min-h-screen bg-base-200 flex justify-center items-center" >
+       <div className="card shadow-lg w-full max-w-sm">
+      <div className="card-body " >
+        <h1 className="text-2xl font-bold mb-4 text-center">Create a new account</h1>
+        <div className="space-y-4  ">
+            <input
+              className="input input-bordered w-full"
+              type="text"
+              placeholder="Name"
+              ref={nameRef}
+            />
+            <input 
+              className="input input-bordered w-full"
+              type="text"
+              placeholder="Email"
+              ref={emailRef}
+            />
+            <input
+              className="input input-bordered w-full"
+              type="password"
+              placeholder="Password"
+              ref={passwordRef}
+            />
+        </div>
+        <div className="mt-4">
+          <button
+            type="submit"
+            className="btn btn-success"
+            onClick={signUpUser}
+          >
+            Sign Up
+          </button>
+        </div>
       </div>
     </div>
     </div>
-  );
+  );  
 };
 
 export default SignUp;

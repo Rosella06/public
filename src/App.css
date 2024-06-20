@@ -1,26 +1,26 @@
-.container-n {
+/* .container-n {
   width: 300px;
   margin: auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f9f9f9;
-}
+} */
 
-.input_space {
+/* .input_space {
   margin-bottom: 10px;
-}
+} */
 
-input[type=text], input[type=password] {
+/* input[type=text], input[type=password] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
-}
+} */
 
-button {
+/* button {
   background-color: #04AA6D;
   color: white;
   padding: 14px 45px;
@@ -28,38 +28,34 @@ button {
   border: none;
   cursor: pointer;
   
-}
-button:hover {
+} */
+/* button:hover {
   opacity: 0.8;
 }
 h1 {
   text-align: center;
   margin-bottom: 20px;
-}
+} */
 
-.container.home {
+/* .container.home {
   max-width: 600px;
   margin: auto;
   padding: 20px;
 } */
- body {
+ /* body {
   display: flex;
   justify-content: center; 
   align-items: center; 
   height: 100vh; 
-}
-.Sign-In,.Sign-Up{
+} */
+/* .Sign-In,.Sign-Up{
   margin-right: 5px;
     padding: 5px 10px;
-}
+} */
 
-.signin-page {
+/* .signin-page {
   display: flex;
   justify-content: center; 
   align-items: center; 
   height: 100vh; 
-}
-
-
-
-
+}  */
