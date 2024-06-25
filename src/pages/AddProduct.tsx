@@ -16,8 +16,8 @@ const AddProduct = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const newProduct = { name: name, price: price, quantity: quantity, image: image };
-            const response = await axios.post('http://localhost:8001/add-product', newProduct);
+            const newProduct = { p_product_name: name, p_price: price, p_quantity: quantity, p_image: image };
+            const response = await axios.post('http://localhost:8001/api/product/add-product', newProduct);
             console.log(response)
             setIsAdded(true);
             setTimeout(() => setIsAdded(false), 3000);

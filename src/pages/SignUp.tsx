@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -19,7 +19,7 @@ const SignUp = () => {
     }
   
     try {
-      const response = await axios.post('http://localhost:8001/signup', {
+      const response = await axios.post('http://localhost:8001/api/auth/signup', {
         name,
         email,
         password,

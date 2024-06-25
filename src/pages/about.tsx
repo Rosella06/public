@@ -1,15 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../img/Shopee.svg.png';
 import '@fortawesome/fontawesome-free/css/all.css';
 
 interface Product {
-  image: string;
-  name: string;
-  price: number;
-  quantity: number;
-  id: number;
+  p_id: number,
+  p_product_name: string,
+  p_quantity: number,
+  p_price: number,
+  p_image: string
 }
 
 interface CartItem {
@@ -29,8 +29,8 @@ const About = () => {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get('http://localhost:8001/product');
-      setProducts(res.data);
+      const res = await axios.get('http://localhost:8001/api/product');
+      setProducts(res.data.data);
     } catch (error) {
       console.log(error);
     }
@@ -50,9 +50,9 @@ const About = () => {
   }, []);
 
   const handleAddToCart = (product: Product) => {
-    const cartIndex = cart.findIndex((x) => x.id === product.id);
+    const cartIndex = cart.findIndex((x) => x.id === product.p_id);
     if (cartIndex === -1) {
-      const updatedCart = [...cart, { id: product.id, sum: 1 }];
+      const updatedCart = [...cart, { id: product.p_id, sum: 1 }];
       localStorage.setItem('cart', JSON.stringify(updatedCart));
       setCart(updatedCart);
     } else {
@@ -110,7 +110,7 @@ const About = () => {
     navigate('/');
   };
 
-  const filter = products.filter((s) => s.name.includes(search) || s.price.toString().includes(search));
+  const filter = products.filter((s) => s.p_product_name.includes(search) || s.p_price.toString().includes(search));
 
   return (
     <div>
@@ -161,62 +161,62 @@ const About = () => {
       {/* Open the modal using document.getElementById('ID').showModal() method */}
 
       <dialog ref={openModal} className="modal fixed inset-0 z-100 flex items-center justify-center bg-black bg-opacity-60">
-        
-  <div className="modal-page bg-white p-4 rounded-lg shadow-lg max-w-sm w-full">
-    <h2 className="text-xl font-semibold mb-4 text-gray-900">ตะกร้าสินค้า</h2>
-    <div className="cartlist max-h-96 overflow-y-auto">
-      {cart.map((x: CartItem) => {
-        const currentProduct = products.find(f => f.id === x.id);
-        if (currentProduct) {
-          return (
-            <div className="cartlist-items border border-gray-300 p-4 rounded-lg flex items-center justify-between mb-4" key={x.id}>
-              <div className="cartlist-left flex items-center">
-                <img src={currentProduct.image} alt={currentProduct.name} className="w-16 h-16 object-cover rounded-lg mr-4" />
-                <div className="cartlist-detail">
-                  <p className="font-semibold text-gray-900">ชื่อสินค้า: {currentProduct.name}</p>
-                  <p className="text-sm text-gray-700">ราคา: {currentProduct.price}B</p>
-                  <p className="text-sm text-gray-700">จำนวนคงเหลือ: {currentProduct.quantity}</p>
-                </div>
-              </div>
-              <div className="cartlist-right text-right">
-                <p className="text-sm text-gray-700">จำนวน: {x.sum}</p>
-                <button className="btn bg-gray-600 hover:bg-gray-700 text-white px-2 py-1 rounded-md" onClick={() => handleIncreaseQuantity(x.id)}>+</button>
-                <button className="btn bg-gray-600 hover:bg-gray-700 text-white px-2 py-1 rounded-md" onClick={() => handleDecreaseQuantity(x.id)}>-</button>
-                <button className="btn-remove bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-md" onClick={() => handleRemoveFromCart(x.id)}>ลบจากตะกร้า</button>
-              </div>
-            </div>
-          );
-        }
-        return null;
-      })}
-    </div>
-    
-    <div className="modal-action mt-4 flex justify-center space-x-4">
-    <form method="dialog">
-      <button className="btn btn-primary" onClick={() => setCartVisible(false)}>ปิด</button>
-      
-      </form>
-      <button className="btn">ซื้อสินค้า</button>
 
-    </div>
-  </div>
-</dialog>
+        <div className="modal-page bg-white p-4 rounded-lg shadow-lg max-w-sm w-full">
+          <h2 className="text-xl font-semibold mb-4 text-gray-900">ตะกร้าสินค้า</h2>
+          <div className="cartlist max-h-96 overflow-y-auto">
+            {cart.map((x: CartItem) => {
+              const currentProduct = products.find(f => f.p_id === x.id);
+              if (currentProduct) {
+                return (
+                  <div className="cartlist-items border border-gray-300 p-4 rounded-lg flex items-center justify-between mb-4" key={x.id}>
+                    <div className="cartlist-left flex items-center">
+                      <img src={currentProduct.p_image} alt={currentProduct.p_product_name} className="w-16 h-16 object-cover rounded-lg mr-4" />
+                      <div className="cartlist-detail">
+                        <p className="font-semibold text-gray-900">ชื่อสินค้า: {currentProduct.p_product_name}</p>
+                        <p className="text-sm text-gray-700">ราคา: {currentProduct.p_price}B</p>
+                        <p className="text-sm text-gray-700">จำนวนคงเหลือ: {currentProduct.p_quantity}</p>
+                      </div>
+                    </div>
+                    <div className="cartlist-right text-right">
+                      <p className="text-sm text-gray-700">จำนวน: {x.sum}</p>
+                      <button className="btn bg-gray-600 hover:bg-gray-700 text-white px-2 py-1 rounded-md" onClick={() => handleIncreaseQuantity(x.id)}>+</button>
+                      <button className="btn bg-gray-600 hover:bg-gray-700 text-white px-2 py-1 rounded-md" onClick={() => handleDecreaseQuantity(x.id)}>-</button>
+                      <button className="btn-remove bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-md" onClick={() => handleRemoveFromCart(x.id)}>ลบจากตะกร้า</button>
+                    </div>
+                  </div>
+                );
+              }
+              return null;
+            })}
+          </div>
+
+          <div className="modal-action mt-4 flex justify-center space-x-4">
+            <form method="dialog">
+              <button className="btn btn-primary" onClick={() => setCartVisible(false)}>ปิด</button>
+
+            </form>
+            <button className="btn">ซื้อสินค้า</button>
+
+          </div>
+        </div>
+      </dialog>
 
       <div className='product grid grid-cols-1 md:grid-cols-5 gap-4 mt-8'>
         {filter.map((e: Product) => (
-          <div className='product-items border border-gray-300 p-4 rounded-lg text-center bg-white' key={e.id}>
-            <img src={e.image} alt={e.name} className='card w-48 h-48 bg-base-100 shadow-xl object-cover mx-auto rounded-lg' />
+          <div className='product-items border border-gray-300 p-4 rounded-lg text-center bg-white' key={e.p_id}>
+            <img src={e.p_image} alt={e.p_product_name} className='card w-48 h-48 bg-base-100 shadow-xl object-cover mx-auto rounded-lg' />
 
-            <p className='text-sm font-semibold text-gray-700'>ID: {e.id}</p>
-            <p className='product-name text-lg text-gray-900 mb-2'>{e.name}</p>
-            <p className='text-sm text-gray-700'>ราคาสินค้า: {e.price}B</p>
-            <p className='text-sm text-gray-700'>จำนวนคงเหลือ: {e.quantity}</p>
+            <p className='text-sm font-semibold text-gray-700'>ID: {e.p_id}</p>
+            <p className='product-name text-lg text-gray-900 mb-2'>{e.p_product_name}</p>
+            <p className='text-sm text-gray-700'>ราคาสินค้า: {e.p_price}B</p>
+            <p className='text-sm text-gray-700'>จำนวนคงเหลือ: {e.p_quantity}</p>
             <div className='button-group mt-4'>
-              <Link to={`/edit-product/${e.id}`} className='edit-link text-yellow-500 hover:bg-yellow-500 hover:text-white px-2 py-1 rounded-md'>แก้ไข</Link>
+              <Link to={`/edit-product/${e.p_id}`} className='edit-link text-yellow-500 hover:bg-yellow-500 hover:text-white px-2 py-1 rounded-md'>แก้ไข</Link>
               <button className='edit-link text-orange-400 hover:bg-orange-400 hover:text-white px-2 py-1 rounded-md' onClick={() => handleAddToCart(e)}>
                 เพิ่มลงตะกร้า
               </button>
-              <button onClick={() => handleDelete(e.id)} className='edit-link text-red-600 hover:bg-red-600 hover:text-white px-2 py-1 rounded-md'>
+              <button onClick={() => handleDelete(e.p_id)} className='edit-link text-red-600 hover:bg-red-600 hover:text-white px-2 py-1 rounded-md'>
                 ลบ
               </button>
             </div>
