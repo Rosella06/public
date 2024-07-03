@@ -18,7 +18,6 @@ const EditProduct = () => {
         const fetchProduct = async () => {
             try {
                 const res = await axios.get(`http://localhost:8001/api/product/${id}`);
-                
                 setProduct({
                     p_id: res.data.data.p_id,
                     p_product_name: res.data.data.p_product_name,
@@ -98,12 +97,17 @@ const EditProduct = () => {
                                 onChange={(e) => setProduct({...product, p_image: e.target.value})} required
                                 className="input input-bordered w-full" />
                         </div>
-                        <button type="submit" className="btn btn-outline btn-success w-full">
+                        <div className="mt-5 ">
+                        <div className="flex justify-end">
+                        <button type="submit" className="btn btn-success ">
                             บันทึกการเปลี่ยนแปลง
                         </button>
-                        <button type="button" onClick={handleBack} className="btn btn-outline btn-primary w-full">
+                        </div>
+                        <button type="button" onClick={handleBack} className="btn btn-primary ">
                             ย้อนกลับ
                         </button>
+                        </div>
+                      
 
                     </form>
                 </div>

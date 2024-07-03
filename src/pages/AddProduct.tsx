@@ -26,7 +26,9 @@ const AddProduct = () => {
             console.error(error);
         }
     }
-
+    const handleBack = () => {
+        navigate(-1);
+    };
     // const validateImageUrl = (url: string) => {
     //     const pattern = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp))$/i;
     //     return pattern.test(url);
@@ -42,10 +44,8 @@ const AddProduct = () => {
                     <li><Link to="/resume" className="btn btn-outline border-t-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white">Resume</Link></li>
                     <li><Link to="/about" className="btn btn-outline border-t-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white">Shopee</Link></li>
                 </ul>
-
-
             </nav>
-
+            
             <div className='flex   justify-center'>
                 <div className="card w-full p-6 bg-base-100 shadow-xl mt-1 max-w-lg">
                     <div className='text-xl font-semibold text-orange-500'>Add New Product</div>
@@ -63,7 +63,6 @@ const AddProduct = () => {
                                     className="input input-bordered w-full"
                                 />
                             </div>
-
                             <div className="flex flex-col">
                                 <label htmlFor="name" className="label-text text-base-content">ชื่อสินค้า:</label>
                                 <input
@@ -75,7 +74,6 @@ const AddProduct = () => {
                                     className="input input-bordered w-full"
                                 />
                             </div>
-
                             <div className="flex flex-col">
                                 <label htmlFor="price" className="label-text text-base-content">ราคาสินค้า:</label>
                                 <input
@@ -87,7 +85,6 @@ const AddProduct = () => {
                                     className="input input-bordered w-full"
                                 />
                             </div>
-
                             <div className="flex flex-col">
                                 <label htmlFor="quantity" className="label-text text-base-content">จำนวนคงเหลือ:</label>
                                 <input
@@ -99,7 +96,6 @@ const AddProduct = () => {
                                     className="input input-bordered w-full"
                                 />
                             </div>
-
                             <div className="flex flex-col">
                                 <label htmlFor="image" className="label-text text-base-content">ลิงก์รูปภาพ:</label>
                                 <input
@@ -111,10 +107,12 @@ const AddProduct = () => {
                                     className="input input-bordered w-full"
                                 />
                             </div>
-
                             <div className="flex justify-end">
                                 <button type="submit" className='btn btn-outline border-t-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white'>เพิ่มสินค้า</button>
                             </div>
+                            <button type="button" onClick={handleBack} className="btn btn-primary ">
+                                ย้อนกลับ
+                            </button>
                         </form>
                     </div>
                 </div>

@@ -34,30 +34,37 @@ const SignUp = () => {
       navigate("/about");
     } catch (error) {
       console.error("Error signing up:", error);
-      alert("Failed to register user. Please try again.");
+      alert("Name and email already taken.");
     }
   };
   
   return (
-    <div className="hero min-h-screen bg-base-200 flex justify-center items-center" >
+    <div className="hero min-h-screen bg-base-200 flex justify-center items-center " >
        <div className="card shadow-lg w-full max-w-sm">
       <div className="card-body " >
         <h1 className="text-2xl font-bold mb-4 text-center">Create a new account</h1>
         <div className="space-y-4  ">
+        <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+        Name 
+  </span>
             <input
-              className="input input-bordered w-full"
-              type="text"
-              placeholder="Name"
+              className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+              placeholder="Name Surname"
               ref={nameRef}
             />
+             <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+             Email 
+  </span>
             <input 
-              className="input input-bordered w-full"
-              type="text"
-              placeholder="Email"
+              className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" 
+              placeholder="you@example.com"
               ref={emailRef}
             />
+            <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+            password 
+  </span>
             <input
-              className="input input-bordered w-full"
+              className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
               type="password"
               placeholder="Password"
               ref={passwordRef}
