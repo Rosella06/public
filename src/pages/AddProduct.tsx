@@ -21,7 +21,7 @@ const AddProduct = () => {
             console.log(response)
             setIsAdded(true);
             setTimeout(() => setIsAdded(false), 3000);
-            navigate('/about');
+            navigate('/');
         } catch (error) {
             console.error(error);
         }
@@ -32,7 +32,14 @@ const AddProduct = () => {
     // const validateImageUrl = (url: string) => {
     //     const pattern = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp))$/i;
     //     return pattern.test(url);
-    // }
+    // }.
+
+    const handleChange = (e: { target: { value: any; }; }) => {
+        const value = e.target.value;
+        if (value.length < 46) {
+            setName(value);
+        }
+    };
 
     return (
         <div>
@@ -41,14 +48,13 @@ const AddProduct = () => {
                 <div className='nav-contents'>
                 </div>
                 <ul className='barss flex space-x-6'>
-                    <li><Link to="/resume" className="btn btn-outline border-t-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white">Resume</Link></li>
-                    <li><Link to="/about" className="btn btn-outline border-t-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white">Shopee</Link></li>
+                    <li><Link to="/resume" className="btn btn-outline border-t-2  text-primary  ">Resume</Link></li>
+                    <li><Link to="/" className="btn btn-outline border-t-2  text-primary  ">Shopee</Link></li>
                 </ul>
             </nav>
-            
             <div className='flex   justify-center'>
-                <div className="card w-full p-6 bg-base-100 shadow-xl mt-1 max-w-lg">
-                    <div className='text-xl font-semibold text-orange-500'>Add New Product</div>
+                <div className="card w-full p-6 bg-base-100 shadow-xl mt-1 max-w-lg text-primary">
+                    <div className='text-xl font-semibold '>Add New Product</div>
                     <div className="divider mt-2"></div>
                     <div className="h-full w-full pb-6 bg-base-100">
                         <form onSubmit={handleSubmit} className="space-y-4">
@@ -69,10 +75,13 @@ const AddProduct = () => {
                                     type="text"
                                     id="name"
                                     value={name}
-                                    onChange={(e) => setName(e.target.value)}
+                                    onChange={handleChange}
                                     required
-                                    className="input input-bordered w-full"
+                                    className={`input input-bordered w-full ${name.length >= 45 ? 'border-red-500' : ''}`}
                                 />
+                                {name.length >= 45 && (
+                                    <p className="text-red-500 text-sm mt-1">คุณพิมพ์ครบ 45 ตัวอักษรแล้ว</p>
+                                )}
                             </div>
                             <div className="flex flex-col">
                                 <label htmlFor="price" className="label-text text-base-content">ราคาสินค้า:</label>
@@ -108,18 +117,16 @@ const AddProduct = () => {
                                 />
                             </div>
                             <div className="flex justify-end">
-                                <button type="submit" className='btn btn-outline border-t-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white'>เพิ่มสินค้า</button>
+                                <button type="submit" className=' btn btn-primary '>เพิ่มสินค้า</button>
                             </div>
-                            <button type="button" onClick={handleBack} className="btn btn-primary ">
+                            <button type="button" onClick={handleBack} className="btn border-neutral-600">
                                 ย้อนกลับ
                             </button>
                         </form>
                     </div>
                 </div>
-            </div>
-        </div>
-
-
+            </div >
+        </div >
     );
 }
 

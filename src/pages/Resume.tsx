@@ -9,7 +9,7 @@ function Resume() {
         </div>
         <ul className='barss flex space-x-6'>
           <li><Link to="/resume" className="btn btn-outline border-t-2 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white">Resume</Link></li>
-          <li><Link to="/about" className="btn btn-outline border-t-2 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white">Shopee</Link></li>
+          <li><Link to="/" className="btn btn-outline border-t-2 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white">Shopee</Link></li>
         </ul>
       </div>
 
