@@ -8,7 +8,7 @@ import AddProduct from "./pages/AddProduct";
 import EditProduct from "./pages/EditProduct";
 import SignUp from "./pages/SignUp";
 import Login from "./components/login";
-import ProductHome from "./pages/productHome";
+import ProductHome from "./pages/productHome"
 import Notfound from "./pages/notfound";
 
 const router = createBrowserRouter([
